@@ -194,7 +194,7 @@ yum -y install git2u
 > 1. if=/dev/zero : Read from /dev/zero file. /dev/zero is a special file in that provides as many null characters to build storage file called /swapfile1.
 > 2. of=/swapfile1 : Read from /dev/zero write storage file to /swapfile1.
 > 3. bs=1024 : Read and write 1024 BYTES bytes at a time.
-> 4 .count=524288 : Copy only 523288 BLOCKS input blocks.
+> 4. count=524288 : Copy only 523288 BLOCKS input blocks.
 ## 리사이즈
 ```sh
 swapoff /swapfile
