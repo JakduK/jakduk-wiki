@@ -14,3 +14,15 @@ https://www.lifewire.com/how-to-view-and-remove-safari-plug-ins-2260895 /Library
 # brew
 * https://docs.brew.sh/Formula-Cookbook#homebrew-terminology 용어 설명
 * https://github.com/Homebrew/homebrew-cask-versions cask설치시 하위 버전 패키지 지원
+
+# Terminal
+## 단축키
+* Control + u : Remove a current line
+* Control + w : Remove a word
+* Control + k : Delete from cursor to the end of the line
+* Control + a : Move cursor to the beginning of the line
+* Control + e : Move cursor to the end of the line
+
+## 커맨드 팁
+* 현재 패스 복사 : pwd|pbcopy
+* cd stack : cd -, cd --, cd --- ....
