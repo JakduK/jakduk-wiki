@@ -89,18 +89,18 @@ timedatectl set-timezone Asia/Seoul
 # 시간 sync
 https://www.howtogeek.com/tips/how-to-sync-your-linux-server-time-with-network-time-servers-ntp How to Sync Your Linux Server Time with Network Time Servers (NTP)
 
-* ntpd 확인
-```sh
+## ntpd 확인
+```
 systemctl status ntpd
 ```
 
-* ntpd 설치
-```sh
+## ntpd 설치
+```
 yum install -y ntpd
 ```
 
-* sync 실행
-```sh
+## sync 실행
+```
 /usr/sbin/ntpdate pool.ntp.org
 ```
 
