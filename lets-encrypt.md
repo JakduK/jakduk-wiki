@@ -2,10 +2,10 @@
 <!-- SUBTITLE: Let's Encrypt, Https, TLS -->
 
 # Letsencrypt 간편 셋팅
-* https://certbot.eff.org/ 접속
-* OS, 웹서버 선택
-* 안내하는데로 진행한다.
-* crontab으로 자동 갱신
+1.  https://certbot.eff.org/ 접속
+1.  OS, 웹서버 선택
+1.  안내하는데로 진행한다.
+1.  crontab으로 자동 갱신
 ```sh
 crontab -e 0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
 ```
