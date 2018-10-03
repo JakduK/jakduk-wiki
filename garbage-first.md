@@ -236,16 +236,16 @@ mixed mode로그는 fully young mode와 비교했을때 새로운 흥미로운 �
 5. 카드 테이블안에 적당한 위치를 dirty로 마킹하는데 걸린 시간. 적당한 위치는 GC가 자체적으로 수행하는 힙 mutation으로 정해진다. The time it takes to mark the appropriate locations in the card table as dirty. Appropriate locations are defined by the mutations to the heap that GC does itself, e.g. while enqueuing references.
 
 # Summary
-이 내용은 G1이 어떻게 돌아가는지 충분한 기본 이해를 제공 할 것이다. 간결한 내용을 위해 humongous objects 등의 구현의 자세한 부분은 상당히 많이 제외했다.
-G1은 모든 것을 고려한 hotspot의 가장 진보한 production-ready 가비지 콜렉터이다. 또한 hotspot엔지니어들에 의해 새로운 최적화들과 새로운 자바 버전을 통해 들어올 기능들로 끊임없이 향상되고 있다.
+이 내용은 G1이 어떻게 돌아가는지 충분한 기본 이해를 제공 할 것이다. 간결한 내용을 위해 humongous objects 등 자세한 구현은 많이 제외했다.
+G1은 모든 것을 고려한 hotspot의 가장 진보한 production-ready 가비지 콜렉터다. 또한 hotspot엔지니어들에 의해 새로운 최적화들과 새로운 자바 버전을 통해 들어올 기능들로 끊임없이 향상되고 있다.
 
 지금까지 본 내용처럼 G1은 pause예측으로 시작해서 힙 fragmentation으로 끝나는 CMS가 가진 넓은 범위의 문제들을 해결했다.
 CPU사용에 제약없는 개별 연산들의 latency에 매우 민감한 애플리케이션이 주어진다면 G1은 hotspot사용자가 선택할 수 있는 최선이다.
 특히 최신 자바버전에서 동작할때 좋을것이다. 그렇지만 latency향상은 공짜가 아니다.
 G1의 throughput오버헤드는 write배리어와 더많은 active백그라운드 쓰레드 덕분에 더 크다.
-그래서 만약 애플리케이션이 throughput이 제한되거나 CPU를 100% 점유하고 개별 pause지속시간이 얼마나 긴지 신경쓰지 않는다면 아마도 CMS나 Parallel이 더 나은 선택일것이다.
+그래서 만약 애플리케이션의 throughput이 제한되거나 CPU를 100% 점유하고 개별 pause지속시간이 얼마나 긴지 신경쓰지 않는다면 아마도 CMS나 Parallel이 더 나은 선택일것이다.
 
 올바른 GC알고리즘을 선택하고 셋팅하는 방법은 오직 시도와 에러를 겪는 것이다.
-그러나 다음 챕터에서 전반적인 가이드를 제공합니다.
+그러나 다음 챕터에서 전반적인 가이드를 제공한다.
 
 P.S G1은 Java9에서 십중팔구 기본 GC가 될것이다. http://openjdk.java.net/jeps/248
