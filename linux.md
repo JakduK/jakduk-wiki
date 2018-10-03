@@ -75,8 +75,8 @@ systemctl reset-failed
 date
 ```
 
-*/etc/localtime 심볼릭 링크가 타임존을 가리키고 있다.
-*/etc/localtime 심볼릭 링크를 /usr/share/zoneinfo 안에서 원하는 타임존을 선택해서 업데이트한다.
+* /etc/localtime 심볼릭 링크가 타임존을 가리키고 있다.
+* /etc/localtime 심볼릭 링크를 /usr/share/zoneinfo 안에서 원하는 타임존을 선택해서 업데이트한다.
 
 ```sh
 ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
@@ -107,13 +107,13 @@ yum install -y ntpd
 
 # 로그 검색 커맨드 팁
 ## tail
-*tail -n+<줄번호> : <줄번호> 번째부터 출력
-*-A 옵션 : after의미로 검색된 줄 아래로 포함할 줄수
-*-B 옵션 : before의미로 검색된 줄 위로 포함할 줄수
+* tail -n+<줄번호> : <줄번호> 번째부터 출력
+* -A 옵션 : after의미로 검색된 줄 아래로 포함할 줄수
+* -B 옵션 : before의미로 검색된 줄 위로 포함할 줄수
 
 ## less
-*more의 기능 강화 커맨드
-*more보다 less 사용 습관 들이는 게 좋음
+* more의 기능 강화 커맨드
+* more보다 less 사용 습관 들이는 게 좋음
 
 # curl
 * form data
