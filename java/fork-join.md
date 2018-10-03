@@ -1,4 +1,4 @@
-<!-- TITLE: Fork Join -->
+<!-- TITLE: Fork/Join -->
 <!-- SUBTITLE: Fork/Join Framework -->
 
 ![Fork Join Parallelism](/uploads/fork-join/fork-join-parallelism.png "Fork Join Parallelism")
