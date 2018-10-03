@@ -17,7 +17,7 @@ mongorestore --collection people --db accounts dump/
 * mongodump
 ```sh
 mongodump --db test --collection collection
-mongodump  --db test --excludeCollection=users --excludeCollection=salaries
+mongodump --db test --excludeCollection=users --excludeCollection=salaries
 ```
 
 # 스크립트 실행
