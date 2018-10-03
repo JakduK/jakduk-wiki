@@ -4,8 +4,7 @@
 # Network Address and Port Translation
 NAT의 확장판 기술로 NAT, NAPT 각각 존재하는 기술이나 현대에서 말하는 NAT은 100% NAPT를 의미한다.
 적은수의 외부 IP 주소로 다수의 내부 IP 주소를 외부 네트워크에 연결시켜주는 기술.
-* http://www.tcpipguide.com/free/t_IPNATPortBasedOverloadedOperationNetworkAddressPor.htm
-상세한 내용 (안 읽음)
+* http://www.tcpipguide.com/free/t_IPNATPortBasedOverloadedOperationNetworkAddressPor.htm 상세한 내용 (안 읽음)
 * https://www.cisco.com/c/en/us/about/press/internet-protocol-journal/back-issues/table-contents-29/anatomy.html
 
 내부 IP 주소:포트로 출발한 패킷을 라우터가 외부 IP 주소:포트로 출발한 것처럼 패킷 헤더를 조작하고 맵핑 테이블에 저장한 다음 목적지로 보낸다.
