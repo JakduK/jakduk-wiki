@@ -1,5 +1,5 @@
 <!-- TITLE: Jakduk's Wiki -->
-<!-- SUBTITLE: 작두K의 지식공유 공간 -->
+<!-- SUBTITLE: -->
 
 # 오픈소스 프로젝트 작두K의 지식공유 공간
 
