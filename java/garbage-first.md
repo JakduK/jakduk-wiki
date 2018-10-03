@@ -32,18 +32,16 @@ live오브젝트 복사 처리를 Evacuation으로 부르고 기존 Young콜렉�
 evacuataion pause의 전체 로그양이 많기 때문에 단순화를 위해 첫 fully-young evacuation pause와 관련없는 로그를 생략한다.
 concurrent phase를 자세하게 설명한뒤 생략한 부분들로 돌아올 것이다. 
 완전한 로그 레코드를 위해 parallel phase 상세내용과 다른 phase의 상세내용이 분리된 섹션으로 추출됐다.
-```text
-0.134: [GC pause (G1 Evacuation Pause) (young), 0.0144119 secs]1
-    [Parallel Time: 13.9 ms, GC Workers: 8]2
-        …3
-    [Code Root Fixup: 0.0 ms]4
-    [Code Root Purge: 0.0 ms]5
-    [Clear CT: 0.1 ms]
-    [Other: 0.4 ms]6
-        …7
-    [Eden: 24.0M(24.0M)->0.0B(13.0M) 8Survivors: 0.0B->3072.0K 9Heap: 24.0M(256.0M)->21.9M(256.0M)]10
-    [Times: user=0.04 sys=0.04, real=0.02 secs] 11
-```
+> 0.134: [GC pause (G1 Evacuation Pause) (young), 0.0144119 secs]`1`
+>     [Parallel Time: 13.9 ms, GC Workers: 8]`2`
+>         …3
+>     [Code Root Fixup: 0.0 ms]4
+>     [Code Root Purge: 0.0 ms]5
+>     [Clear CT: 0.1 ms]
+>     [Other: 0.4 ms]6
+>         …7
+>     [Eden: 24.0M(24.0M)->0.0B(13.0M) 8Survivors: 0.0B->3072.0K 9Heap: 24.0M(256.0M)->21.9M(256.0M)]10
+>     [Times: user=0.04 sys=0.04, real=0.02 secs] 11
 1. G1이 pause하고 Young구역 클리닝만 한다. JVM 스타트업 후 134밀리초 뒤에 pause되었고,  pause지속 시간이 0.0144초로 측정되었다.
 2. 8개 쓰레드가 13.9밀리초 동안 병렬로 활동했다.
 3. 생략한 내용은 다음 섹션에서 자세히 볼 것이다.
