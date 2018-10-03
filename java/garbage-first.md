@@ -34,14 +34,14 @@ concurrent phase를 자세하게 설명한뒤 생략한 부분들로 돌아올 �
 완전한 로그 레코드를 위해 parallel phase 상세내용과 다른 phase의 상세내용이 분리된 섹션으로 추출됐다.
 > 0.134: [GC pause (G1 Evacuation Pause) (young), 0.0144119 secs]`1`
 >     [Parallel Time: 13.9 ms, GC Workers: 8]`2`
->         …3
->     [Code Root Fixup: 0.0 ms]4
->     [Code Root Purge: 0.0 ms]5
+>         …`3`
+>     [Code Root Fixup: 0.0 ms]`4`
+>     [Code Root Purge: 0.0 ms]`5`
 >     [Clear CT: 0.1 ms]
->     [Other: 0.4 ms]6
->         …7
->     [Eden: 24.0M(24.0M)->0.0B(13.0M) 8Survivors: 0.0B->3072.0K 9Heap: 24.0M(256.0M)->21.9M(256.0M)]10
->     [Times: user=0.04 sys=0.04, real=0.02 secs] 11
+>     [Other: 0.4 ms]`6`
+>         …`7`
+>     [Eden: 24.0M(24.0M)->0.0B(13.0M) `8`Survivors: 0.0B->3072.0K `9`Heap: 24.0M(256.0M)->21.9M(256.0M)]`10`
+>     [Times: user=0.04 sys=0.04, real=0.02 secs]`11`
 1. G1이 pause하고 Young구역 클리닝만 한다. JVM 스타트업 후 134밀리초 뒤에 pause되었고,  pause지속 시간이 0.0144초로 측정되었다.
 2. 8개 쓰레드가 13.9밀리초 동안 병렬로 활동했다.
 3. 생략한 내용은 다음 섹션에서 자세히 볼 것이다.
@@ -59,21 +59,19 @@ concurrent phase를 자세하게 설명한뒤 생략한 부분들로 돌아올 �
 
 
 무거운 작업의 대부분은 GC에 집중된 여러 워커 쓰레드들로 완료된다. 이들의 활동은 아래 로그를 통해 설명한다.
-```text
-[Parallel Time: 13.9 ms, GC Workers: 8]1
-    [GC Worker Start (ms)2: Min: 134.0, Avg: 134.1, Max: 134.1, Diff: 0.1]
-    [Ext Root Scanning (ms)3: Min: 0.1, Avg: 0.2, Max: 0.3, Diff: 0.2, Sum: 1.2]
-    [Update RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]
-        [Processed Buffers: Min: 0, Avg: 0.0, Max: 0, Diff: 0, Sum: 0]
-    [Scan RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]
-    [Code Root Scanning (ms)4: Min: 0.0, Avg: 0.0, Max: 0.2, Diff: 0.2, Sum: 0.2]
-    [Object Copy (ms)5: Min: 10.8, Avg: 12.1, Max: 12.6, Diff: 1.9, Sum: 96.5]
-    [Termination (ms)6: Min: 0.8, Avg: 1.5, Max: 2.8, Diff: 1.9, Sum: 12.2]
-        [Termination Attempts7: Min: 173, Avg: 293.2, Max: 362, Diff: 189, Sum: 2346]
-    [GC Worker Other (ms)8: Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.1]
-    GC Worker Total (ms)9: Min: 13.7, Avg: 13.8, Max: 13.8, Diff: 0.1, Sum: 110.2]
-    [GC Worker End (ms)10: Min: 147.8, Avg: 147.8, Max: 147.8, Diff: 0.0]
-```
+> [Parallel Time: 13.9 ms, GC Workers: 8]`1`
+>     [GC Worker Start (ms)`2`: Min: 134.0, Avg: 134.1, Max: 134.1, Diff: 0.1]
+>     [Ext Root Scanning (ms)`3`: Min: 0.1, Avg: 0.2, Max: 0.3, Diff: 0.2, Sum: 1.2]
+>     [Update RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]
+>         [Processed Buffers: Min: 0, Avg: 0.0, Max: 0, Diff: 0, Sum: 0]
+>     [Scan RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]
+>     [Code Root Scanning (ms)`4`: Min: 0.0, Avg: 0.0, Max: 0.2, Diff: 0.2, Sum: 0.2]
+>     [Object Copy (ms)`5`: Min: 10.8, Avg: 12.1, Max: 12.6, Diff: 1.9, Sum: 96.5]
+>     [Termination (ms)`6`: Min: 0.8, Avg: 1.5, Max: 2.8, Diff: 1.9, Sum: 12.2]
+>         [Termination Attempts`7`: Min: 173, Avg: 293.2, Max: 362, Diff: 189, Sum: 2346]
+>     [GC Worker Other (ms)`8`: Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.1]
+>     GC Worker Total (ms)`9`: Min: 13.7, Avg: 13.8, Max: 13.8, Diff: 0.1, Sum: 110.2]
+>     [GC Worker End (ms)`10`: Min: 147.8, Avg: 147.8, Max: 147.8, Diff: 0.0]
 1. 8개 쓰레드가 병렬로 13.9밀리초 활동했다.
 2. pause 시작에 맞춰 워커들의 활동이 시작될때까지 걸린 시간. 만약 Min/Max차이가 크다면 너무 많은 쓰레드들이 사용되고 있는 것이거나 다른 프로세스들이 JVM안에 가비지 콜렉션 프로세스로부터 CPU타임을 뺴앗고 있다.
 3. external roots(클래스로더, JNI레퍼런스, JVM시스템 root 등등)를 스캔하는데 걸린 시간. Sum은 CPU타임이다.
@@ -87,16 +85,14 @@ concurrent phase를 자세하게 설명한뒤 생략한 부분들로 돌아올 �
 
 
 추가적으로 evacuataion pause동안 수행되는 사소한 활동들이 있다. 이 섹션에서 일부분만 다루고 나중에 나머지를 다룰 것이다.
-```text
-[Other: 0.4 ms]1
-    [Choose CSet: 0.0 ms]
-    [Ref Proc: 0.2 ms]2
-    [Ref Enq: 0.0 ms]3
-    [Redirty Cards: 0.1 ms]
-    [Humongous Register: 0.0 ms]
-    [Humongous Reclaim: 0.0 ms]
-    [Free CSet: 0.0 ms]4
-```
+> [Other: 0.4 ms]`1`
+>     [Choose CSet: 0.0 ms]
+>     [Ref Proc: 0.2 ms]`2`
+>     [Ref Enq: 0.0 ms]`3`
+>     [Redirty Cards: 0.1 ms]
+>     [Humongous Register: 0.0 ms]
+>     [Humongous Reclaim: 0.0 ms]
+>     [Free CSet: 0.0 ms]`4`
 1. 병렬화된 사소한 활동들.
 2. non-strong레퍼런스를 제거하거나 제거하지 않아도 되는 것임을 결정하는데 걸린 시간.
 3. 잔여 non-strong레퍼런스를 적절한 레퍼런스큐에 집어넣는데 걸린 시간.
@@ -119,9 +115,7 @@ CMS처럼 G1의 Concurrent Marking은 몇가지 phase로 구성된다. 어떤 ph
 CMS는 이 phase를 위해 별도 STW pause phase를 필요로 한다. 그러나 G1은 Evacuation pause에 끼어들어가기 때문에 오버헤드가 최소화 된다.
 Evacutation pause GC로그의 첫번째 줄에 있는 initial-mark로 알 수 있다
 
-```text
-1.631: [GC pause (G1 Evacuation Pause) (young) (initial-mark), 0.0062656 secs]
-```
+> 1.631: [GC pause (G1 Evacuation Pause) (young) (initial-mark), 0.0062656 secs]
 
 ## Phase 2: Root Region Scan
 이 phase는 root구역이라 불리는 구역에서 도달 할 수 있는 모든 live오브젝트들을 마킹한다. 비어있지 않는 구역은 마킹 사이클 중간에 콜렉팅 될 수 있다.
@@ -129,10 +123,8 @@ concurrent marking 중간에 오브젝트를 옮기는 건 트러블을 일으�
 만약 끝나기전에 evacuation pause를 시작해야 한다면 root region scan의 중단을 미리 요청할 것이다. 그리고 evacuation pause가 끝날때까지 기다린다.
 현재 구현은 root구역이 survivor구역이다. Young Gen의 일부분으로 다음 Evacuation pause때 확실히 콜렉팅 될 것이다.
 
-```text
-1.362: [GC concurrent-root-region-scan-start]
-1.364: [GC concurrent-root-region-scan-end, 0.0028513 secs]
-```
+> 1.362: [GC concurrent-root-region-scan-start]
+> 1.364: [GC concurrent-root-region-scan-end, 0.0028513 secs]
 
 ## Phase 3: Concurrent Mark
 이 phase는 CMS와 아주 비슷하다. 단순히 오브젝트 그래프를 돌아다니면서 방문한 오브젝드를 스페셜 비트맵에 마킹한다.
@@ -153,10 +145,8 @@ Pre-Write배리어를 사용해 달성한다.(나중에 얘기할 Post-Write배�
 G1에서는 concurrent update log 유입을 멈추고 concurrent marking싸이클을 시작했을때 live오브젝트였지만 여전히 마킹안된 오브젝트들을 마킹하기 위해 애플리케이션 쓰레드들을 잠깐 멈춘다.
 이 phase는 레퍼런스 처리(Evacuataion pause의 non-strong reference 참조)와 클래스 언로딩같은 부가적인 제거를 수행한다.
 
-```text
-1.645: [GC remark 1.645: [Finalize Marking, 0.0009461 secs] 1.646: [GC ref-proc, 0.0000417 secs] 1.646: [Unloading, 0.0011301 secs], 0.0074056 secs]
-[Times: user=0.01 sys=0.00, real=0.01 secs]
-```
+> 1.645: [GC remark 1.645: [Finalize Marking, 0.0009461 secs] 1.646: [GC ref-proc, 0.0000417 secs] 1.646: [Unloading, 0.0011301 secs], 0.0074056 secs]
+> [Times: user=0.01 sys=0.00, real=0.01 secs]
 
 ## Phase 5: Cleanup
 최종 phase이다. 다가올 evacuation phase를 준비한다. 힙구역들안에 모든 live오브젝트 갯수를 샌다. 그리고 예상하는 GC효율에 따라 각 구역을 정렬한다.
@@ -166,19 +156,15 @@ G1에서는 concurrent update log 유입을 멈추고 concurrent marking싸이�
 이 phase에서 empty region reclamation이나 대부분 liveness calculation같은 특정 부분은 concurrent이지만 애플리케이션 쓰레드가 간섭하지 않는 동안 그림을 마무리 하기 위해 짧은 STW pause를 필요로한다.
 STW pause로그는 아래 내용 같을 것이다.
 
-```text
-1.652: [GC cleanup 1213M->1213M(1885M), 0.0030492 secs]
-[Times: user=0.01 sys=0.00, real=0.00 secs]
-```
+> 1.652: [GC cleanup 1213M->1213M(1885M), 0.0030492 secs]
+> [Times: user=0.01 sys=0.00, real=0.00 secs]
 
 어떤 힙구역이 가비지만 갖고 있는 것을 발견했을때 pause 로그 포맷이 약간 다른 것을 볼 수 있다.
 
-```text
-1.872: [GC cleanup 1357M->173M(1996M), 0.0015664 secs]
-[Times: user=0.01 sys=0.00, real=0.01 secs]
-1.874: [GC concurrent-cleanup-start]
-1.876: [GC concurrent-cleanup-end, 0.0014846 secs]
-```
+> 1.872: [GC cleanup 1357M->173M(1996M), 0.0015664 secs]
+> [Times: user=0.01 sys=0.00, real=0.01 secs]
+> 1.874: [GC concurrent-cleanup-start]
+> 1.876: [GC concurrent-cleanup-end, 0.0014846 secs]
 
 # Evacuation Pause: Mixed
 concurrent cleanup에서 Old Gen의 전체 영역을 해제 가능하면 아주 좋은 경우다. 그러나 항상 있는 경우는 아니다.
@@ -219,14 +205,11 @@ multiple parallel GC가 어느 오브젝트가 live오브젝트고 가비지인�
 간단히 말하면 Write배리어는 dirty card informaion을 로컬 버퍼에 넣는다. 그리고 특수한 GC쓰레드가 이걸 집어내서 이 정보를 참조하는 구역의 remembered set으로 올려보낸다.
 
 mixed mode로그는 fully young mode와 비교했을때 새로운 흥미로운 내용을 발행한다.
-
-```text
-[Update RS (ms)1: Min: 0.7, Avg: 0.8, Max: 0.9, Diff: 0.2, Sum: 6.1]
-[Processed Buffers2: Min: 0, Avg: 2.2, Max: 5, Diff: 5, Sum: 18]
-[Scan RS (ms)3: Min: 0.0, Avg: 0.1, Max: 0.2, Diff: 0.2, Sum: 0.8]
-[Clear CT: 0.2 ms]4
-[Redirty Cards: 0.1 ms]5
-```
+> [Update RS (ms)`1`: Min: 0.7, Avg: 0.8, Max: 0.9, Diff: 0.2, Sum: 6.1]
+> [Processed Buffers`2`: Min: 0, Avg: 2.2, Max: 5, Diff: 5, Sum: 18]
+> [Scan RS (ms)`3`: Min: 0.0, Avg: 0.1, Max: 0.2, Diff: 0.2, Sum: 0.8]
+> [Clear CT: 0.2 ms]`4`
+> [Redirty Cards: 0.1 ms]`5`
 1. rememberes sets가 concurrently 처리된후 실제 콜렉션 시작전에 여전히 buffer에 저장된 카드가 처리되고 있는지 반드시 확인해야 한다. 이 수치가 높다면 concurrent GC쓰레드는 부하를 조절할 수 없다. 아마 들어오고 있는 필드 변경의 횟수가 압도적이거나 유휴 CPU가 불충분해서 그럴 것이다.
 2. 각 쓰레드들이 로컬 버퍼를 처리하는데 걸린 시간
 3. remembered sets으로부터 들어온 레퍼런스들을 탐색하는데 걸린 시간
