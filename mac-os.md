@@ -2,7 +2,8 @@
 <!-- SUBTITLE: macOS -->
 
 # 사파리 플러그인 완전 삭제
-## Mojave부터 플러그인을 앱으로 취급
+## Mojave
+모하비부터 플러그인을 앱으로 취급
 ## High Sierra
 https://www.lifewire.com/how-to-view-and-remove-safari-plug-ins-2260895 /Library/Internet Plug-Ins 디렉토리에서 삭제
 
