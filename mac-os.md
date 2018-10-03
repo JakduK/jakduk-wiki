@@ -12,5 +12,5 @@ https://www.lifewire.com/how-to-view-and-remove-safari-plug-ins-2260895 /Library
 * Windows와 Alt 키캡을 뽑아 자리를 바꾼다.
 
 # brew
-* [https://docs.brew.sh/Formula-Cookbook#homebrew-terminology 용어 설명]
-* [https://github.com/Homebrew/homebrew-cask-versions cask설치시 하위 버전 패키지 지원]
+* https://docs.brew.sh/Formula-Cookbook#homebrew-terminology 용어 설명
+* https://github.com/Homebrew/homebrew-cask-versions cask설치시 하위 버전 패키지 지원
