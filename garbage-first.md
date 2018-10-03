@@ -101,6 +101,7 @@ concurrent phase를 자세하게 설명한뒤 생략한 부분들로 돌아올 �
 4. 콜렉션 세트안에 해제된 구역들을 반환하는데 걸린 시간. 해제된 구역은 새로운 할당을 위해 활용할 수 있다.
 ```
 
+
 # Concurrent Marking
 G1콜렉터는 CMS의 여러가지 개념위에 구축됐다. 그래서 이 섹션을 진행하기 전에 CMS에 대해 충분히 이해해야 한다.
 여러면에서 차이는 있더라도 Concurrent marking의 목표는 매우 비슷하다.
@@ -161,6 +162,7 @@ STW pause로그는 아래 내용 같을 것이다.
 [Times: user=0.01 sys=0.00, real=0.01 secs]
 1.874: [GC concurrent-cleanup-start]
 1.876: [GC concurrent-cleanup-end, 0.0014846 secs]
+
 
 # Evacuation Pause: Mixed
 concurrent cleanup에서 Old Gen의 전체 영역을 해제 가능하면 아주 좋은 경우다. 그러나 항상 있는 경우는 아니다.
