@@ -38,7 +38,8 @@ systemctl enable <service>
 systemctl disable <service>
 ```
 
-## https://superuser.com/questions/513159/how-to-remove-systemd-services 서비스 제거
+## 서비스 제거
+* https://superuser.com/questions/513159/how-to-remove-systemd-services
 ```sh
 systemctl stop [servicename]
 systemctl disable [servicename]
