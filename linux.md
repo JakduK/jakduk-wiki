@@ -1,21 +1,21 @@
 <!-- TITLE: Linux -->
-<!-- SUBTITLE: Linux -->
+<!-- SUBTITLE: Linux, CentOS -->
 
 # 디렉토리 구조
 https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/opt.html 잘 요약된 글
 
-*/opt
-  *최초 리눅스 벤더들의 옵션 패키지라 부르는 벤더가 제공하는 프로그램을 담는 디렉토리였다. 그래서 optional -> opt. 정식명칭은 optional add-on software packages.
-  *패키지 매니저없이 수동 설치 할 프로그램은 여기로.
-*/usr/local
-  *리눅스 표준 구조로 설치할 프로그램은 여기로.
-*/sbin, /usr/sbin
-  *시스템 관리자(Administrator) 전용 프로그램
+* /opt
+  * 최초 리눅스 벤더들의 옵션 패키지라 부르는 벤더가 제공하는 프로그램을 담는 디렉토리였다. 그래서 optional -> opt. 정식명칭은 optional add-on software packages.
+  * 패키지 매니저없이 수동 설치 할 프로그램은 여기로.
+* /usr/local
+  * 리눅스 표준 구조로 설치할 프로그램은 여기로.
+* /sbin, /usr/sbin
+  * 시스템 관리자(Administrator) 전용 프로그램
 
 # systemd
-*http://linux.systemv.pe.kr/centos-7-systemd-이해하기/
-*https://www.opentechguides.com/how-to/article/centos/169/systemd-custom-service.html 유닛 파일 만들기
-*위치
+* http://linux.systemv.pe.kr/centos-7-systemd-이해하기/
+* https://www.opentechguides.com/how-to/article/centos/169/systemd-custom-service.html 유닛 파일 만들기
+## 디렉토리
 
             Table 1.  Load path when running in system mode (--system).
            ┌────────────────────────┬─────────────────────────────┐
@@ -28,17 +28,17 @@ https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/opt.html 잘 요약된 
            │/usr/lib/systemd/system │ Units of installed packages │
            └────────────────────────┴─────────────────────────────┘
 
-*부팅 서비스 등록
+## 부팅 서비스 등록
 ```sh
 systemctl enable <service>
 ```
 
-*부팅 서비스 제거
+## 부팅 서비스 제거
 ```sh
 systemctl disable <service>
 ```
 
-*https://superuser.com/questions/513159/how-to-remove-systemd-services 서비스 제거
+## https://superuser.com/questions/513159/how-to-remove-systemd-services 서비스 제거
 ```sh
 systemctl stop [servicename]
 systemctl disable [servicename]
