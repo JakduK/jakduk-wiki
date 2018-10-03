@@ -54,12 +54,12 @@ mysql -u [username] -p [dbname] < query.sql
 * --no-create-db : create database 구문 제외
 * --no-create-info : create table 구문 제외
 
-database, table 지정
+* database, table 지정
 ```sql
 mysqldump -u [username] -p [dbname] [tableA] [tableB] > dump.sql
 ```
 
-database 지정
+* database 지정
 ```sql
 mysqldump -u [username] -p --databases [dbname] > dump.sql
 ```
