@@ -19,6 +19,8 @@ mongorestore --collection people --db accounts dump/
 mongodump --db test --collection collection
 ```
 
+
+
 ```sh
 mongodump  --db test --excludeCollection=users --excludeCollection=salaries
 ```
