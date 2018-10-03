@@ -57,9 +57,11 @@ systemctl reset-failed
 리눅스VM 생성후 mongodb 27071포트, nodejs서버 3000포트 접속안되서 시간낭비 많이했음
 
 *https://www.lesstif.com/pages/viewpage.action?pageId=22053128 방화벽 헬퍼 안내 firewall-cmd, firewalld
-*systmctl stop firewalld 한뒤 외부에서 접근 시도
+*systemctl stop firewalld 한뒤 외부에서 접근 시도
 *firewall-cmd --get-active-zone 활성화된 존 확인
 *firewall-cmd --permanent --zone=public --add-port=3000/tcp 활성화된 존에 포트개방
+* firewalld 데몬 정지후 재시작이 안될때가 종종 있다. `kill -9`로 해결해야함.
+  * http://ycsoftware.net/firewalld-service-start-operation-timed-out-terminating/
 
 # nc (netcat) 포트 테스트
 * BSD : nc -z host port
