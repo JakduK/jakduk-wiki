@@ -24,7 +24,7 @@
 * 자유게시판에서는 축구, 개발 관련 글은 물론이고, 기타 주제를 포함한 모든 글을 쓸 수 있습니다. 단, 선량한 풍속 및 기타 사회 질서를 해할 우려가 있는 내용의 글에 대해서는 제재를 받을 수 있습니다.
 * 다음은 게시판의 기능 사용법을 안내합니다.
   * https://jakduk.com/board/free/174 URL 링크 걸기 안내
-  *https://jakduk.com/board/free/182 사진 올리기 안내
+  * https://jakduk.com/board/free/182 사진 올리기 안내
   * https://jakduk.com/board/free/421 Youtube 영상 올리기 안내
 
 
