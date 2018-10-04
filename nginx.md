@@ -30,13 +30,15 @@ koa프레임워크로 nodejs서버를 돌리면서 morgan을 사용한다면 pro
 morgan.token('remote-addr', req => req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress);
 ```
 
-* http://nginx.org/en/docs/http/ngx_http_proxy_module.html#variables x-forwarded-for해더에 넣을 값은 가진 변수이름은 $proxy_add_x_forwarded_for
-* http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header 이 설정은 proxy_set_header 디렉티브를 사용한다.
+* http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header 
+	* 이 설정은 `proxy_set_header` 디렉티브를 사용한다.
+* http://nginx.org/en/docs/http/ngx_http_proxy_module.html#variables 
+	* `x-forwarded-for`헤더에 넣을 값은 가진 변수이름은 `$proxy_add_x_forwarded_for`
 ## 설정 파일을 읽는 시점에 도메인 네임이 ip주소로 변환됨
 도메인 주소의 맵핑 ip주소가 바뀌면 리로드 해야됨. 이를 해결하려면 resolver설정을 추가해야함.
-  A server name, its port and the passed URI can also be specified using variables:
-  proxy_pass http://$host$uri;
-  or even like this:
-  proxy_pass $request;
-  In this case, the server name is searched among the described server groups, and, if not found, is determined using a resolver.
+>  A server name, its port and the passed URI can also be specified using variables:
+>  proxy_pass http://$host$uri;
+>  or even like this:
+>  proxy_pass $request;
+>  In this case, the server name is searched among the described server groups, and, if not found, is determined using a resolver.
 * http://nginx.org/en/docs/http/ngx_http_core_module.html#resolver
