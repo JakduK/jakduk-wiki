@@ -5,7 +5,11 @@
 ## Mojave
 모하비부터 플러그인을 앱으로 취급
 ## High Sierra
-https://www.lifewire.com/how-to-view-and-remove-safari-plug-ins-2260895 /Library/Internet Plug-Ins 디렉토리에서 삭제
+* `~/Library/Internet Plug-Ins` 디렉토리에서 삭제
+	* 해당 사용자에게만 활성화되는 플러그인
+* `/Library/Internet Plug-Ins` 디렉토리에서 삭제
+	* 모든 사용자에게 활성화되는 플러그인
+* https://www.lifewire.com/how-to-view-and-remove-safari-plug-ins-2260895
 
 # Windows 키배열 키보드 사용하기
 * 시스템 환결설정 > 키보드 > 보조 키 > Option/Command 키 상호변경.
