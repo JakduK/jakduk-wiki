@@ -11,7 +11,7 @@ min_uptime 시간 동안 max_restarts 횟수만큼 실패하면 status : errored
 
 # 버그 추적
 ## Node.js
-* Date.toLocaleString() : 파라미터로 로케일을 받는데 포맷팅 안됨.
+### Date.toLocaleString() : 파라미터로 로케일을 받는데 포맷팅 안됨.
 * https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
 
 ```text
