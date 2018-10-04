@@ -1,5 +1,5 @@
 <!-- TITLE: Spring -->
-<!-- SUBTITLE: Spring Framework -->
+<!-- SUBTITLE: Spring Framework, Logback -->
 
 스프링부트 공식 문서의 Logging 파트를 보면
 * https://docs.spring.io/spring-boot/docs/1.5.14.RELEASE/reference/htmlsingle/#howto-configure-logback-for-logging
