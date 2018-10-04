@@ -33,7 +33,7 @@
 
 # Mojave
 ## 메뉴바만 다크모드 적용하기
-다크모드 UI가 눈아픈 나같은 사람은 하이 시에라처럼 메뉴바만 다크모드를 적용해보자.
+다크모드 UI가 눈아픈 나같은 사람은 High Sierra 처럼 메뉴바만 다크모드를 적용해보자.
 * https://www.tekrevue.com/tip/only-dark-menu-bar-dock-mojave/
 * Aqua스타일 UI 항상 켬. 메뉴바만 화면 모드에 맞게 바뀜.
 ```
