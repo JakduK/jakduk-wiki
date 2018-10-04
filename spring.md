@@ -122,6 +122,6 @@ initialization performed by Boot
 </included>
 ```
 
-ch.qos.logback.core.rolling.RollingFileAppender 클래스로 FILE란 이름의 appender를 추가하고, ${FILE_LOG_PATTERN} 패턴으로 로그를 출력하는데, ${FILE_LOG_PATTERN}는 defaults.xml에 정의되어 있다. 그 이외에 rotate 정책이 설정되어 있다.
+`ch.qos.logback.core.rolling.RollingFileAppender` 클래스로 FILE란 이름의 appender를 추가하고, `${FILE_LOG_PATTERN}` 패턴으로 로그를 출력하는데, `${FILE_LOG_PATTERN}`는 defaults.xml에 정의되어 있다. 그 이외에 rotate 정책이 설정되어 있다.
 
 자 이제 종합해보면 base.xml 는 컬러풀한 CONSOLE 로그와 rotate 가능한 spring.log 란 이름의 로그 파일을 생성 해준다.
