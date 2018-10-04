@@ -3,7 +3,7 @@
 
 # 사용법
 ## PM2
-* max_restarts, min_uptime 옵션 이해하기
+### max_restarts, min_uptime 옵션 이해하기
 * https://stackoverflow.com/a/49666928
 max_restarts 옵션은 최대 재시작 횟수를 지정하는 옵션이 아님.
 min_uptime 옵션에 의존하는 옵션으로,
