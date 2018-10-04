@@ -37,8 +37,8 @@ morgan.token('remote-addr', req => req.headers['x-real-ip'] || req.headers['x-fo
 ## 설정 파일을 읽는 시점에 도메인 네임이 IP주소로 변환됨
 도메인 주소의 맵핑 IP주소가 바뀌면 리로드 해야됨. 이를 해결하려면 resolver설정을 추가해야함.
 >  A server name, its port and the passed URI can also be specified using variables:
->  proxy_pass `http://$host$uri`;
+>  `proxy_pass http://$host$uri;`
 >  or even like this:
->  proxy_pass $request;
+>  `proxy_pass $request;`
 >  In this case, the server name is searched among the described server groups, and, if not found, is determined using a resolver.
 * http://nginx.org/en/docs/http/ngx_http_core_module.html#resolver
