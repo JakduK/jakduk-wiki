@@ -63,7 +63,11 @@ mysqldump -u [username] -p [dbname] [tableA] [tableB] > dump.sql
 ```sql
 mysqldump -u [username] -p --databases [dbname] > dump.sql
 ```
-# JDBC 연동
-## 반드시 겪는 오류
+# Touble shooting
+## JDBC 연동
 * java.sql.SQLException: The server time zone value 'KST' is unrecognized or represents more than one time zone.
   * "KST"는 MySQL이 모르는 값이라 발생. "KST"타임존을 적용하겠다면 "Asia/Seoul"사용 ex) mysql://`<HOST>`/`<DB>`?serverTimezone=Asia/Seoul
+
+## sql_mode = ONLY_FULL_GROUP_BY
+* GROUP BY 사용중 실수 방지 설정
+  * http://jason-heo.github.io/mysql/2014/03/05/char13-mysql-group-by-usage.html
