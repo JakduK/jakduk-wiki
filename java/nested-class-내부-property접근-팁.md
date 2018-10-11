@@ -24,3 +24,11 @@ getValueA().getValueB().getValueC().getValueD() 를 수행해야 하지만, null
             return Optional.empty();
         }
     }
+		
+
+# 사용 예시
+	optionalOf(() -> getValueA().getValueB().getValueC().getValueD());
+	
+	
+# 이점
+중간에 null PointException이 발생하더라도 문제없음.
