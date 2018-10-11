@@ -12,3 +12,7 @@
 
 		field.set(null, newValue);
 	}
+
+#사용법
+
+	setFinalStatic(Custom.class.getDeclaredField("temp"), "newValue");
