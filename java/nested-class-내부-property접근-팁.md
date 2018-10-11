@@ -15,7 +15,7 @@ getValueA().getValueB().getValueC().getValueD() 를 수행해야 하지만, null
 코드가 길어지고 가독성 사라짐
 
 
-#팁
+# 팁
 	public static <T> Optional<T> optionalOf(Supplier<T> resolver) {
         try {
             T result = resolver.get();
