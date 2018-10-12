@@ -258,3 +258,23 @@ https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on
 /etc/sudoers 파일은 반드시 visudo 커맨드로 변경해라
 admin권한을 부여하려면 wheel그룹에 추가해라
 적용이 안된다면 %weel ALL=(ALL) ALL 코멘트 해제해라
+# vim
+```
+# 줄번호 보기
+:set number
+:set nu
+
+# 줄번호 안보기
+:set nonumber
+:set nonu
+
+# 강조 제거
+:set noh
+
+# 0 ~ 100 줄 코멘트
+:0,100s/^/#
+
+# 0 ~ 100 줄 코멘트 해제
+:0,100s/^#/
+
+```
