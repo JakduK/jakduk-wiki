@@ -83,6 +83,9 @@ firewall-cmd --reload
 firewall-cmd --zone=public --add-service=https
 # firewall-cmd --zone=public --remove-service=https
 firewall-cmd --reload
+
+# 확인
+firewall-cmd --list-services --zone=public
 ```
 # nc (netcat) 포트 테스트
 * BSD : nc -z host port
