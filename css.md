@@ -3,7 +3,7 @@
 
 # Media query
 ```css
-// 600px <=
+/* 600px <= */
 @media(max-width: 600px)
 
 // 600px >=
