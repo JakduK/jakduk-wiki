@@ -8,7 +8,11 @@
 	2.  certbot 설치
 1.  crontab으로 자동 갱신
 ```sh
-crontab -e 0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
+# 편집화면 진입
+crontab -e 
+
+# 편집화면에서 입력
+0 0,12 * * * python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew
 ```
 
 # 와일드카드 인증서 
