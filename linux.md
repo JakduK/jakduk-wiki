@@ -213,7 +213,7 @@ yum -y install git2u
 
 * 리붓하면 사라지므로 유지시키기위해 /etc/fstab 파일에 아래 내용을 추가한다.
 ```sh
- /swapfie swap swap defaults 0 0
+ /swapfiie swap swap defaults 0 0
 ```
 
 * https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-swap-adding.html
