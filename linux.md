@@ -241,7 +241,7 @@ rm /swapfile
 
 https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-swap-removing-file.html
 
-## 계정 관리 (CentOS)
+# 계정 관리 (CentOS)
 * 계정 추가 : useradd 계정이름
 * 계정이 속한 그룹 목록 : groups
 * 계정의 그룹 변경 : usermod -G 그룹이름 계정이름
@@ -252,7 +252,7 @@ https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-swap-removing-file.ht
 * 그룹 삭제 : groupdel 그룹이름
 * 그룹 목록 보기 : cat /etc/group
 
-## sudo
+# sudo
 https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
 
 /etc/sudoers 파일은 반드시 visudo 커맨드로 변경해라
