@@ -60,8 +60,31 @@ systemctl reset-failed
 * systemctl stop firewalld 후 외부에서 접근 시도
 * firewalld 데몬 정지후 재시작이 종종 안 될때가 있다. `kill -9`로 해결해야함.
   * http://ycsoftware.net/firewalld-service-start-operation-timed-out-terminating/
-* firewall-cmd --get-active-zone 활성화된 존 확인
-* firewall-cmd --permanent --zone=public --add-port=3000/tcp 활성화된 존에 포트개방
+```
+# 기본 존 확인
+firewall-cmd --get-default-zone
+
+# 활성화된 존 확인
+firewall-cmd --get-active-zone
+
+# 활성화된 존에 포트개방
+firewall-cmd --permanent --zone=public --add-port=3000/tcp
+firewall-cmd --reload
+
+# 서비스로 포트를 관리 할 수 있다.
+# 서비스 목록 보기
+firewall-cmd --get-services
+
+# 80 열기
+firewall-cmd --zone=public --add-service=http
+# firewall-cmd --zone=public --remove-service=http
+firewall-cmd --reload
+
+# 443 열기
+firewall-cmd --zone=public --add-service=https
+# firewall-cmd --zone=public --remove-service=https
+firewall-cmd --reload
+```
 # nc (netcat) 포트 테스트
 * BSD : nc -z host port
 * Linux : nc -zv host port
