@@ -172,10 +172,11 @@ wget https://centos7.iuscommunity.org/ius-release.rpm
 rpm -i ius-release.rpm
 yum -y remove git
 yum -y install git2u
-</source>
-=swapfile=
-===만들기/장착===
-<source>
+```
+
+# swapfile
+## 만들기/장착
+```
  # 당연히 root 권한으로 해야함.
  # swapfile 만들기
  # fallocate 커맨드를 사용하는 예제가 많은데 CentOS는 dd커맨드로 swapfile을 만들어야함.
