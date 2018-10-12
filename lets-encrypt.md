@@ -5,7 +5,7 @@
 1.  https://certbot.eff.org/ 접속
 1.  OS, 웹서버 선택
 1.  안내하는데로 진행한다.
-	2.  certbot 설치
+	1.  certbot 설치
 1.  crontab으로 자동 갱신
 ```sh
 # 편집화면 진입
