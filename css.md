@@ -5,9 +5,7 @@
 ```css
 // 600px <=
 @media(max-width: 600px)
-```
 
-```css
 // 600px >=
 @media(min-width: 600px)
 ```
