@@ -27,7 +27,8 @@ db db_name
 db.createUser({user:'id',pwd:'password',roles:['role']})
 ```
 
-> `mongoose`는 접속 옵션에 `dbName`을 지정해도 `authdb`를 지정하지 않으면 인증에 실패한다.
+> `mongoose`는 접속 옵션에 `dbName`을 지정해도 `authdb`를 지정하지 않으면 인증에 실패한다. 이것때문에 시간 무지 낭비함.
+> * https://stackoverflow.com/a/33642761/4449475
 > ```
 > options: {
 >     auth: {
