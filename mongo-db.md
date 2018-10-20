@@ -18,8 +18,9 @@ security:
 * 계정 추가
 	* `roles`프로퍼티에 적절한 권한을 지정해준다.
 	* buildt-in roles : https://docs.mongodb.com/manual/reference/built-in-roles/
+* 계정 관리 : https://docs.mongodb.com/manual/reference/command/nav-user-management/
 ```
-#mongodba 접속
+#mongodb 접속
 mongo
 #db 선택
 db db_name
