@@ -26,6 +26,8 @@ mongo
 db db_name
 #계정 생성 및 권한 설정
 db.createUser({user:'id',pwd:'password',roles:['role']})
+#계정 권한 변경
+db.updateUser({user:'id',roles:['role', 'role2']})
 ```
 
 > `mongoose`는 접속 옵션에 `dbName`을 지정해도 `authdb`를 지정하지 않으면 인증에 실패한다. 이것때문에 시간 무지 낭비함.
