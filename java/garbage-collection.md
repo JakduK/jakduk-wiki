@@ -16,4 +16,4 @@ Java8기준으로 가능한 조합을 타나낸 테이블인데 굵은 글씨만
 * https://www.linkedin.com/pulse/jvm-why-cms-garbage-collector-deprecating-kunal-saxena CMS는 Java9부터 없다.
 * https://blogs.oracle.com/jonthecollector/our-collectors Garbage collector 특징 요약 및 아래 테이블에 나열된 조합의 이유를 FAQ로 설명함.
 
-![2018 10 01 12 56 36](/research/java/files/garbage-collection/-2018-10-01--12-56-36.png "2018 10 01 12 56 36")
+![2018 10 01 12 56 36](/uploads/garbage-collection/-2018-10-01--12-56-36.png "2018 10 01 12 56 36")

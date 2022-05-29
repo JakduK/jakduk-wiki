@@ -12,12 +12,12 @@ G1은 몇가지 통찰위에 만들어졌다. 첫째, 힙은 연속적인 Young/
 대신, 힙은 보통 2048개의 작은 구역으로 나뉘어 오브젝트를 저장한다.
 각각의 구역은 Eden/Survivor/Old가 될 수 있다. 모든 Eden/Survivor 구역의 논리적인 결합이 Young Gen이고
 모든 Old구역은 Old Gen이다.
-![Ea 907 E 2 C Fdbd 4 E 8 C Bf 03 0 A 5 F 3764 D 2 Fb](/research/java/files/g-1/ea-907-e-2-c-fdbd-4-e-8-c-bf-03-0-a-5-f-3764-d-2-fb.png "Ea 907 E 2 C Fdbd 4 E 8 C Bf 03 0 A 5 F 3764 D 2 Fb")
+![Ea 907 E 2 C Fdbd 4 E 8 C Bf 03 0 A 5 F 3764 D 2 Fb](/uploads/g-1/ea-907-e-2-c-fdbd-4-e-8-c-bf-03-0-a-5-f-3764-d-2-fb.png "Ea 907 E 2 C Fdbd 4 E 8 C Bf 03 0 A 5 F 3764 D 2 Fb")
 
 이구조는 GC가 전체 힙을 한번에 콜렉팅하는 것을 회피하고 점진적으로 접근 할 수 있도록 해준다.
 구역들을 묶은 힙의 하위세트(콜렉션 세트)가 콜렉팅 대상으로 고려될 것이다. 
 모든 Young 구역은 pause 때마다 매번 콜렉팅되고 특정 Old구역도 함께 콜렉팅 된다.
-![3 Fcd 3 C 52 B 6 E 8 476 B 87 E 0 06 Bf 8 F 837 Dfe](/research/java/files/g-1/3-fcd-3-c-52-b-6-e-8-476-b-87-e-0-06-bf-8-f-837-dfe.png "3 Fcd 3 C 52 B 6 E 8 476 B 87 E 0 06 Bf 8 F 837 Dfe")
+![3 Fcd 3 C 52 B 6 E 8 476 B 87 E 0 06 Bf 8 F 837 Dfe](/uploads/g-1/3-fcd-3-c-52-b-6-e-8-476-b-87-e-0-06-bf-8-f-837-dfe.png "3 Fcd 3 C 52 B 6 E 8 476 B 87 E 0 06 Bf 8 F 837 Dfe")
 
 또다른 G1의 참신함은 concurrent phase 동안 각 구역이 포함하고 있는 live오브젝트의 양을 계산한다. (이 계산은 콜렉션 세트 구축할때 사용된다.)
 가비지가 대부분인 구역이 가장 먼저 콜렉팅된다. 그래서 이름이 garbage first collection이다.
@@ -189,15 +189,15 @@ G1은 Remembered Sets를 갖고 있다.
 아래 이미지가 보여 주듯이 각 구역은 remembered set를 갖고 있다. remembered set은 바깥에서 이 구역을 가리키는 레퍼런스 목록이다.
 이 레퍼런스들은 부가적인 GC roots들로 다루게 될 것이다. concurrent marking동안 가비지로 결정된 Old구역안에 오브젝트들은 바깥 레퍼런스가 이들을 향해도 무시하고 콜렉팅 될 것이다.
 이 경우 가리키는 대상도 마찬가지로 가비지다.
-![F 0 Ad 8 Ecd Bc 82 4 D 9 D Bac 8 60 C 6 F 0609 F 6 D](/research/java/files/g-1/f-0-ad-8-ecd-bc-82-4-d-9-d-bac-8-60-c-6-f-0609-f-6-d.png "F 0 Ad 8 Ecd Bc 82 4 D 9 D Bac 8 60 C 6 F 0609 F 6 D")
+![F 0 Ad 8 Ecd Bc 82 4 D 9 D Bac 8 60 C 6 F 0609 F 6 D](/uploads/g-1/f-0-ad-8-ecd-bc-82-4-d-9-d-bac-8-60-c-6-f-0609-f-6-d.png "F 0 Ad 8 Ecd Bc 82 4 D 9 D Bac 8 60 C 6 F 0609 F 6 D")
 
 다음에 일어나는 일은 다른 콜렉터들이 하는 것과 똑같다.
 multiple parallel GC가 어느 오브젝트가 live오브젝트고 가비지인지 파악한다.
-![12 F 45 Bd 9 E 8 C 5 41 Df 9578 9 Dd 057837880](/research/java/files/g-1/12-f-45-bd-9-e-8-c-5-41-df-9578-9-dd-057837880.png "12 F 45 Bd 9 E 8 C 5 41 Df 9578 9 Dd 057837880")
+![12 F 45 Bd 9 E 8 C 5 41 Df 9578 9 Dd 057837880](/uploads/g-1/12-f-45-bd-9-e-8-c-5-41-df-9578-9-dd-057837880.png "12 F 45 Bd 9 E 8 C 5 41 Df 9578 9 Dd 057837880")
 
 마지막으로 live오브젝트들은 survivor구역으로 이동된다. 그리고 필요하다면 빈 구역을 새로 만든다.
 이제 비워진 구역들이 해제되어 오브젝트들을 저장할 때 다시 사용할 수 있게 되었다.
-![Untitled](/research/java/files/g-1/untitled.png "Untitled")
+![Untitled](/uploads/g-1/untitled.png "Untitled")
 
 애플리케이션 런타임동안 remembered sets을 유지하기 위해 필드에 기록을 수행할때마다 Post-Write배리어를 발행한다.
 만약 결과 레퍼런스가 구역간에 교차되는 경우, 예로 한 구역에서 다른 구역을 가리키는 한 대응 엔트리가 대상 구역의 remembered set안에 나타날 것이다.
