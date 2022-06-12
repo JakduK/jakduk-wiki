@@ -89,3 +89,7 @@
 3. 알림 Job 수동으로 1회 실행  
     수동으로 한번 실행해야 pipeline script가 job 구성에 반영됨.  
     알림 받을 job 추가/제거 할때 job 구성을 변경하지 말고 pipeline script 수정후, 마찬가지로 1회 실행.
+    
+# 트러블 슈팅
+## telegram chat_id 알아내기
+https://web.telegram.org 접속해서 채팅방 선택후 현재 url에서 확인.
