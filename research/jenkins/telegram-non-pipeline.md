@@ -1,7 +1,7 @@
-# 젠킨스 단독으로 telegram 알림 받기 설정 (비 pipeline job 전용)
+# 젠킨스 단독으로 telegram 알림 받기 설정
 
 1. 플러그인 설치 : https://plugins.jenkins.io/groovy/
-1. 알림 Job 생성
+1. 알림 Job 생성 (FreeStyle project)
 1. 알림 Job 설정  
     **Build after other projects are built** 체크 > **Projects to watch** 잡 등록 > **Trigger even if the build fails** 선택  
     **Add BuildStep** > **Execute system Groovy script**
