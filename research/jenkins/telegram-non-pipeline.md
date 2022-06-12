@@ -61,7 +61,7 @@
    def escapeSpecialLetter(str) {
        return str.replaceAll(/([#-.])/, '\\\\\\\\$1')
    }
-```
+   ```
 
 # 트러블 슈팅
 
