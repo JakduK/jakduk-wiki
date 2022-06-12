@@ -9,8 +9,8 @@
    import hudson.model.Result
    import jenkins.model.Jenkins
 
-   BOT_API_TOKEN = "566310779:AAGWePtNZHS4KLOIIJMJWbW57pcRwi0e5rY"
-   CHAT_ID = "-202530792"
+   BOT_API_TOKEN = "bot api token"
+   CHAT_ID = "chat id"
 
    sendForUpstreamBuilds(build)
 
