@@ -19,7 +19,6 @@
            if (cause.class.name.equals('hudson.model.Cause$UpstreamCause')) {
                def jenkins = Jenkins.getInstanceOrNull()
                if (jenkins) {
-                   def jenkinsUrl = jenkins.getRootUrl()
                    // upstream 프로젝트가 삭제되었으면 upstreamProject == null
                    def upstreamProject = jenkins.getItemByFullName(cause.upstreamProject)
                    // upstream 빌드가 삭제되었으면 upstreamBuild == null
@@ -27,13 +26,13 @@
                    if (!upstreamProject) {
                        send(escapeSpecialLetter("${cause.upstreamProject} not found."))
                    } else if (!upstreamBuild) {
-                       def url = "${jenkinsUrl}${upstreamProject.url}"
+                       def url = "${jenkins.rootUrl}${upstreamProject.url}"
                        def title = escapeSpecialLetter("${cause.upstreamProject} #${cause.upstreamBuild}")
                        def message = escapeSpecialLetter(" not found.")
                        send("[${title}](${url})${message}")
                    } else {
                        def title = escapeSpecialLetter(upstreamBuild.fullDisplayName)
-                       def url = "${jenkinsUrl}${upstreamBuild.url}"
+                       def url = "${jenkins.rootUrl}${upstreamBuild.url}"
                        def marker = upstreamBuild.result.equals(Result.SUCCESS) ? "🟢" : upstreamBuild.result.equals(Result.FAILURE) ? "🔴" : "🟡"
                        def message = escapeSpecialLetter("Build ${upstreamBuild.result.toString().toLowerCase()}.")
                        def elapsed = escapeSpecialLetter("${upstreamBuild.durationString} elapsed.")
@@ -61,7 +60,7 @@
    def escapeSpecialLetter(str) {
        return str.replaceAll(/([#-.])/, '\\\\\\\\$1')
    }
-   ```
+    ```
 
 # 트러블 슈팅
 
