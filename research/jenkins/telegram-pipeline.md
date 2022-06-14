@@ -2,10 +2,10 @@
 
 1. 알림 Job 생성 (Pipeline)
 2. 알림 Job 설정 
-    - Build after other projects are built 체크 > Projects to watch 잡 등록 > Trigger even if the build fails 선택
-    - Pipeline > Pipeline Script.
-        - `UPSTREAM_JOBS`, `BOT_API_TOKEN`, `CHAT_ID` 설정.
-        - Use Groovy Sandbox 체크 해제.
+    - **Build after other projects are built** 체크 > **Projects to watch** 잡 등록 > **Trigger even if the build fails** 선택
+    - **Pipeline** > **Pipeline Script**.
+        - `BOT_API_TOKEN`, `CHAT_ID` 입력.
+        - **Use Groovy Sandbox** 체크 해제.
     ```groovy
     import jenkins.model.Jenkins
     import hudson.model.Result
