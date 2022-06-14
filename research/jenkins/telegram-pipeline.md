@@ -1,28 +1,19 @@
 # 젠킨스 단독으로 telegram 알림 받기 설정
 
 1. 알림 Job 생성 (Pipeline)
-2. 알림 Job 설정 Pipeline > Pipeline Script.
-    - `UPSTREAM_JOBS`, `BOT_API_TOKEN`, `CHAT_ID` 설정.
-    - Use Groovy Sandbox 체크 해제.
+2. 알림 Job 설정 
+    - Build after other projects are built 체크 > Projects to watch 잡 등록 > Trigger even if the build fails 선택
+    - Pipeline > Pipeline Script.
+        - `UPSTREAM_JOBS`, `BOT_API_TOKEN`, `CHAT_ID` 설정.
+        - Use Groovy Sandbox 체크 해제.
     ```groovy
     import jenkins.model.Jenkins
     import hudson.model.Result
-
-    // 결과 알릴 job 등록.
-    UPSTREAM_JOBS = [
-        "job 1",
-        "job n"
-    ]
 
     BOT_API_TOKEN = "bot api token"
     CHAT_ID = "chat id"
 
     node {
-        properties([
-            pipelineTriggers([
-                upstream(upstreamProjects: UPSTREAM_JOBS.join(','), threshold: Result.FAILURE)
-            ])
-        ])
         stage("Send") {
             script {
                 sendForUpstreamBuilds(currentBuild)
