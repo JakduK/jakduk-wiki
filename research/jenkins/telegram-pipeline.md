@@ -43,16 +43,19 @@
                 def title = escapeSpecialLetter("${cause.upstreamProject} #${cause.upstreamBuild}")
                 return "[${title}](${url})" + escapeSpecialLetter(" not found.")
             } else {
+                def trigger = upstreamBuild.getCause(UserIdCause)
                 def url = "${jenkins.rootUrl}${upstreamBuild.url}"
                 def title = escapeSpecialLetter(upstreamBuild.fullDisplayName)
                 def marker = getMarker(upstreamBuild.result)
                 def message = escapeSpecialLetter("Build ${upstreamBuild.result.toString().toLowerCase()}.")
+                def startedBy = escapeSpecialLetter(trigger ? "${trigger.getShortDescription()}." : null)
                 def elapsed = escapeSpecialLetter("`${upstreamBuild.durationString} elapsed.`")
                 return [
                     "[${marker} ${title}](${url})",
                     message,
-                    elapsed
-                ].join("\n")
+                    startedBy,
+                    elapsed,
+                ].findAll {it != null}.join("\n")            }
             }
         } else {
             return escapeSpecialLetter("Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent.")
