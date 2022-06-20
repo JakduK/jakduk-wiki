@@ -1,4 +1,4 @@
-# 젠킨스 단독으로 telegram 알림 받기 설정
+# 젠킨스 단독으로 Telegram 알림 받기 설정
 
 1. 알림 Job 생성 (Pipeline)
 2. 알림 Job 설정 
