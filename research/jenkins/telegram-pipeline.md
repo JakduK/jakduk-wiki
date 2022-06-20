@@ -55,7 +55,7 @@
                     message,
                     startedBy,
                     elapsed,
-                ].findAll {it != null}.join("\n")            }
+                ].findAll {it != null}.join("\n")
             }
         } else {
             return escapeSpecialLetter("Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent.")
