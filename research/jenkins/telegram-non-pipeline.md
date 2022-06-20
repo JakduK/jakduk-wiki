@@ -1,4 +1,4 @@
-# 젠킨스 단독으로 telegram 알림 받기 설정
+# 젠킨스 단독으로 Telegram 알림 받기 설정
 
 1. 플러그인 설치 : https://plugins.jenkins.io/groovy/
 1. 알림 Job 생성 (FreeStyle project)
