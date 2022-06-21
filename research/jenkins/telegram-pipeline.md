@@ -77,7 +77,7 @@
 
     @NonCPS
     def escapeSpecialLetter(str) {
-        return str.replaceAll(/([#-.])/, '\\\\\\\\$1')
+        return str.replaceAll(/([#-.])/, '\\\\\\\\$1').replaceAll(/(["])/, '\\\\$1')
     }
 
     @NonCPS
