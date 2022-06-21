@@ -47,28 +47,24 @@
                 def title = "${cause.upstreamProject} #${cause.upstreamBuild}"
                 return [color:Result.FAILURE, title:title, url:url, message:"Build not found."]
             } else {
-                def trigger = upstreamBuild.getCause(UserIdCause)
                 def url = "${jenkins.rootUrl}${upstreamBuild.url}"
                 def title = upstreamBuild.fullDisplayName
                 def message = "Build ${upstreamBuild.result.toString().toLowerCase()}."
-                def startedBy = trigger ? "${trigger.getShortDescription()}." : null
                 def elapsed = "_${upstreamBuild.durationString} elapsed._"
+                def startedBy = "${upstreamBuild.getCauses().collect {"_${it.shortDescription}_"}.join(",\n")}."
                 return [
                     color: upstreamBuild.result,
                     title: title,
                     url: url,
                     message: [
                         message,
-                        startedBy,
                         elapsed,
-                    ].findAll {it != null}.join("\n")
+                        startedBy,
+                    ].findAll {it}.join("\n")
                 ]
             }
         } else {
-            return [
-              color:Result.FAILURE, 
-              title:"Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent."
-            ]
+            return [color:Result.FAILURE, title:"Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent."]
         }
     }
 
