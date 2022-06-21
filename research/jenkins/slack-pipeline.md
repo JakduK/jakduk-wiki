@@ -9,7 +9,6 @@
     ```groovy
     import jenkins.model.Jenkins
     import hudson.model.Result
-    import hudson.model.Cause.UserIdCause
 
     WEB_HOOKS = [
         "your web hook url 1",
