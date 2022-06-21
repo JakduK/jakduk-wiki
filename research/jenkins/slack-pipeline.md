@@ -88,7 +88,7 @@
                         title,
                         url,
                         message
-                    ].findAll {it != null}.join(',')
+                    ].findAll {it}.join(',')
                 }
             }
         ]
