@@ -31,34 +31,51 @@
                        def message = escapeSpecialLetter(" not found.")
                        send("[${title}](${url})${message}")
                    } else {
-                       def title = escapeSpecialLetter(upstreamBuild.fullDisplayName)
                        def url = "${jenkins.rootUrl}${upstreamBuild.url}"
-                       def marker = upstreamBuild.result.equals(Result.SUCCESS) ? "🟢" : upstreamBuild.result.equals(Result.FAILURE) ? "🔴" : "🟡"
+                       def title = escapeSpecialLetter(upstreamBuild.fullDisplayName)
+                       def marker = getMarker(upstreamBuild.result)
                        def message = escapeSpecialLetter("Build ${upstreamBuild.result.toString().toLowerCase()}.")
-                       def elapsed = escapeSpecialLetter("${upstreamBuild.durationString} elapsed.")
-                       send("[${marker} ${title}](${url})\n${message}\n${elapsed}")
+                       def elapsed = escapeSpecialLetter("`${upstreamBuild.durationString} elapsed.`")
+                       def startedBy = escapeSpecialLetter("${upstreamBuild.getCauses().collect {"`${it.shortDescription}`"}.join(",\n")}.")
+                       send([
+                           "[${marker} ${title}](${url})",
+                           message,
+                           elapsed,
+                           startedBy
+                       ].join("\n"))
                    }
                } else {
-                   send("Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent.")
+                   send(escapeSpecialLetter("Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent."))
                }
            }
        }
    }
 
    def send(message) {
-       def proc = [
-           'curl', '-s', "https://api.telegram.org/bot${BOT_API_TOKEN}/sendMessage",
-           '-H', 'content-type:application/json',
-           '-d', "{\"chat_id\":\"${CHAT_ID}\", \"parse_mode\":\"MarkdownV2\", \"text\":\"${message}\"}"
-       ].execute()
-       def sout = new StringBuilder()
-       proc.consumeProcessOutput(sout, sout)
-       proc.waitForProcessOutput()
-       println sout
+      def proc = [
+          'curl', '-s', "https://api.telegram.org/bot${BOT_API_TOKEN}/sendMessage",
+          '-H', 'content-type:application/json',
+          '-d', "{\"chat_id\":\"${CHAT_ID}\", \"parse_mode\":\"MarkdownV2\", \"text\":\"${message}\"}"
+      ].execute()
+      def sout = new StringBuilder()
+      proc.consumeProcessOutput(sout, sout)
+      proc.waitForProcessOutput()
+      println sout
    }
 
    def escapeSpecialLetter(str) {
-       return str.replaceAll(/([#-.])/, '\\\\\\\\$1')
+       if (!str) {
+           return str;
+       }
+       return str.replaceAll(/([#-.])/, '\\\\\\\\$1').replaceAll(/(["])/, '\\\\$1')
+   }
+
+   def getMarker(result) {
+       switch (result) {
+           case Result.SUCCESS: return "🟢"
+           case Result.FAILURE: return "🔴"
+           default: return "🟡"
+       }
    }
     ```
 
