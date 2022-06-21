@@ -51,7 +51,7 @@
                 def title = upstreamBuild.fullDisplayName
                 def message = "Build ${upstreamBuild.result.toString().toLowerCase()}."
                 def elapsed = "_${upstreamBuild.durationString} elapsed._"
-                def startedBy = "${upstreamBuild.getCauses().collect {"_${it.shortDescription}_"}.join(",\n")}."
+                def startedBy = "${upstreamBuild.getCauses().collect {"_${escapeSpecialLetter(it.shortDescription)}_"}.join(",\n")}."
                 return [
                     color: upstreamBuild.result,
                     title: title,
@@ -104,5 +104,10 @@
             case Result.FAILURE: return "#dc3545"
             default: return "#ffc107"
         }
+    }
+
+    @NonCPS
+    def escapeSpecialLetter(str) {
+        return str.replaceAll(/(["])/, '\\\\$1')
     }
     ```
