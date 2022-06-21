@@ -43,19 +43,18 @@
                 def title = escapeSpecialLetter("${cause.upstreamProject} #${cause.upstreamBuild}")
                 return "[${title}](${url})" + escapeSpecialLetter(" not found.")
             } else {
-                def trigger = upstreamBuild.getCause(UserIdCause)
                 def url = "${jenkins.rootUrl}${upstreamBuild.url}"
                 def title = escapeSpecialLetter(upstreamBuild.fullDisplayName)
                 def marker = getMarker(upstreamBuild.result)
                 def message = escapeSpecialLetter("Build ${upstreamBuild.result.toString().toLowerCase()}.")
-                def startedBy = escapeSpecialLetter(trigger ? "${trigger.getShortDescription()}." : null)
                 def elapsed = escapeSpecialLetter("`${upstreamBuild.durationString} elapsed.`")
+                def startedBy = escapeSpecialLetter("${upstreamBuild.getCauses().collect {"`${it.shortDescription}`"}.join(",\n")}.")
                 return [
                     "[${marker} ${title}](${url})",
                     message,
-                    startedBy,
                     elapsed,
-                ].findAll {it != null}.join("\n")
+                    startedBy,
+                ].findAll {it}.join("\n")
             }
         } else {
             return escapeSpecialLetter("Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent.")
@@ -63,7 +62,17 @@
     }
 
     def send(message) {
-        sh "curl -s -X POST -H 'content-type: application/json' -d '{\"chat_id\":\"${CHAT_ID}\",\"parse_mode\":\"MarkdownV2\",\"text\":\"${message}\"}' 'https://api.telegram.org/bot${BOT_API_TOKEN}/sendMessage'"
+        sh """
+    curl 'https://api.telegram.org/bot${BOT_API_TOKEN}/sendMessage' \
+    -s \
+    -X POST \
+    -H 'content-type: application/json' \
+    -d '{\
+            "chat_id\":\"${CHAT_ID}\",
+            \"parse_mode\":\"MarkdownV2\",
+            \"text\":\"${message}\"
+        }'
+    """
     }
 
     @NonCPS
