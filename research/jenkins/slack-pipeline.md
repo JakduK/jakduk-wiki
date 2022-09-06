@@ -16,6 +16,18 @@
         "..."
     ]
 
+    SUCCESS_WEB_HOOKS = [
+        "your web hook url 1",
+        "your web hook url 2",
+        "..."
+    ]
+
+    FAILURE_WEB_HOOKS = [
+        "your web hook url 1",
+        "your web hook url 2",
+        "..."
+    ]
+
     pipeline {
         agent any
 
@@ -34,7 +46,12 @@
         for(cause in build.getBuildCauses()) {
             if (cause._class.contains("UpstreamCause")) {
                 def result = getResult(cause)
-                send(result)
+                send(result, WEB_HOOKS)
+                if (result.status == Result.SUCCESS) {
+                    send(result, SUCCESS_WEB_HOOKS)
+                } else if (result.status == Result.FAILURE) {
+                    send(result, FAILURE_WEB_HOOKS)
+                }
             }
         }
     }
@@ -46,18 +63,26 @@
             def upstreamProject = jenkins.getItemByFullName(cause.upstreamProject)
             def upstreamBuild = upstreamProject?.getBuildByNumber(cause.upstreamBuild)
             if (!upstreamProject) {
-                return [color:Result.FAILURE, title:"[${Result.FAILURE}] ${cause.upstreamProject} not found."]
+                return [
+                    status:Result.FAILURE, 
+                    title:"[${Result.FAILURE}] ${cause.upstreamProject} not found."
+                ]
             } else if (!upstreamBuild) {
                 def url = "${jenkins.rootUrl}${upstreamProject.url}"
                 def title = "[${Result.FAILURE}] ${cause.upstreamProject} #${cause.upstreamBuild}"
-                return [color:Result.FAILURE, title:title, url:url, message:"Build not found."]
+                return [
+                    status:Result.FAILURE, 
+                    title:title, 
+                    url:url, 
+                    message:"Build not found."
+                ]
             } else {
                 def url = "${jenkins.rootUrl}${upstreamBuild.url}"
                 def title = "[${upstreamBuild.result}] ${upstreamBuild.fullDisplayName}"
                 def elapsed = "_${upstreamBuild.durationString} elapsed._"
                 def startedBy = "${upstreamBuild.getCauses().collect {"_${it.shortDescription}_"}.join(",\n")}."
                 return [
-                    color: upstreamBuild.result,
+                    status: upstreamBuild.result,
                     title: title,
                     url: url,
                     message: [
@@ -67,16 +92,19 @@
                 ]
             }
         } else {
-            return [color:Result.FAILURE, title:"Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent."]
+            return [
+                status:Result.FAILURE, 
+                title:"Jenkins service has not been started, or was already shut down, or we are running on an unrelated JVM, typically an agent."
+            ]
         }
     }
 
-    def send(Map map = [:]) {
-        def color = "\"color\": \"${getResultColor(map.color)}\""
-        def title = "\"title\": \"${escapeSpecialLetter(map.title)}\""
-        def url = map.url ? "\"title_link\": \"${map.url}\"" : null
-        def message = map.message ? "\"text\": \"${escapeSpecialLetter(map.message)}\"" : null
-        for (webHook in WEB_HOOKS) {
+    def send(result, webHooks) {
+        def color = "\"color\": \"${getStatusColor(result.status)}\""
+        def title = "\"title\": \"${escapeSpecialLetter(result.title)}\""
+        def url = result.url ? "\"title_link\": \"${result.url}\"" : null
+        def message = result.message ? "\"text\": \"${escapeSpecialLetter(result.message)}\"" : null
+        for (webHook in webHooks) {
             sh """
     curl ${webHook} \
     -s \
@@ -101,8 +129,8 @@
     }
 
     @NonCPS
-    def getResultColor(result) {
-        switch (result) {
+    def getStatusColor(status) {
+        switch (status) {
             case Result.SUCCESS: return "#2eb886"
             case Result.FAILURE: return "#dc3545"
             default: return "#ffc107"
