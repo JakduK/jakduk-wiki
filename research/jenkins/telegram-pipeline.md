@@ -13,10 +13,16 @@
     BOT_API_TOKEN = "bot api token"
     CHAT_ID = "chat id"
 
-    node {
-        stage("Send") {
-            script {
-                sendForUpstreamBuilds(currentBuild)
+    pipeline {
+        agent any
+
+        stages {
+            stage("Send") {
+                steps {
+                    script {
+                        sendForUpstreamBuilds(currentBuild)
+                    }
+                }
             }
         }
     }
