@@ -16,10 +16,16 @@
         "..."
     ]
 
-    node {
-        stage("Send") {
-            script {
-                sendForUpstreamBuilds(currentBuild)
+    pipeline {
+        agent any
+
+        stages {    
+            stage("Send") {
+                steps {
+                    script {
+                        sendForUpstreamBuilds(currentBuild)
+                    }
+                }
             }
         }
     }
@@ -40,23 +46,21 @@
             def upstreamProject = jenkins.getItemByFullName(cause.upstreamProject)
             def upstreamBuild = upstreamProject?.getBuildByNumber(cause.upstreamBuild)
             if (!upstreamProject) {
-                return [color:Result.FAILURE, title:"${cause.upstreamProject} not found."]
+                return [color:Result.FAILURE, title:"[${Result.FAILURE}] ${cause.upstreamProject} not found."]
             } else if (!upstreamBuild) {
                 def url = "${jenkins.rootUrl}${upstreamProject.url}"
-                def title = "${cause.upstreamProject} #${cause.upstreamBuild}"
+                def title = "[${Result.FAILURE}] ${cause.upstreamProject} #${cause.upstreamBuild}"
                 return [color:Result.FAILURE, title:title, url:url, message:"Build not found."]
             } else {
                 def url = "${jenkins.rootUrl}${upstreamBuild.url}"
-                def title = upstreamBuild.fullDisplayName
-                def message = "Build ${upstreamBuild.result.toString().toLowerCase()}."
+                def title = "[${upstreamBuild.result}] ${upstreamBuild.fullDisplayName}"
                 def elapsed = "_${upstreamBuild.durationString} elapsed._"
-                def startedBy = "${upstreamBuild.getCauses().collect {"_${escapeSpecialLetter(it.shortDescription)}_"}.join(",\n")}."
+                def startedBy = "${upstreamBuild.getCauses().collect {"_${it.shortDescription}_"}.join(",\n")}."
                 return [
                     color: upstreamBuild.result,
                     title: title,
                     url: url,
                     message: [
-                        message,
                         elapsed,
                         startedBy,
                     ].findAll {it}.join("\n")
@@ -69,9 +73,9 @@
 
     def send(Map map = [:]) {
         def color = "\"color\": \"${getResultColor(map.color)}\""
-        def title = "\"title\": \"${map.title}\""
+        def title = "\"title\": \"${escapeSpecialLetter(map.title)}\""
         def url = map.url ? "\"title_link\": \"${map.url}\"" : null
-        def message = map.message ? "\"text\": \"${map.message}\"" : null
+        def message = map.message ? "\"text\": \"${escapeSpecialLetter(map.message)}\"" : null
         for (webHook in WEB_HOOKS) {
             sh """
     curl ${webHook} \
